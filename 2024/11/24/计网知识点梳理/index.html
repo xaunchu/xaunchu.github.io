@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+    <meta charset="utf-8">
+
+    
+
+    <!-- 渲染优化 -->
+    <meta name="renderer" content="webkit">
+    <meta name="force-rendering" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="HandheldFriendly" content="True" >
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!--icon-->
+
+    
+        <link rel="shortcut icon" href="../../../../images/favicon.ico">
+    
+    
+        <link rel="icon" type="image/png" sizes="16x16" href="../../../../images/favicon-96x96.png">
+    
+    
+        <link rel="icon" type="image/png" sizes="32x32" href="../../../../images/favicon-192x192.png">
+    
+    
+        <link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon.png">
+    
+    
+        <link rel="mask-icon" href="../../../../images/favicon.svg">
+    
+
+
+    <!-- meta -->
+
+
+<title>计网知识点梳理 | XC&#39;s blog</title>
+
+
+    <meta name="keywords" content="计算机网络">
+
+
+
+
+    <!-- OpenGraph -->
+ 
+    <meta name="description" content="正在经历期中周，所以整理一下复习的时候写的东西，把各种概念串了一遍">
+<meta property="og:type" content="article">
+<meta property="og:title" content="计网知识点梳理">
+<meta property="og:url" content="http://example.com/2024/11/24/%E8%AE%A1%E7%BD%91%E7%9F%A5%E8%AF%86%E7%82%B9%E6%A2%B3%E7%90%86/index.html">
+<meta property="og:site_name" content="XC&#39;s blog">
+<meta property="og:description" content="正在经历期中周，所以整理一下复习的时候写的东西，把各种概念串了一遍">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2024/11/24/%E8%AE%A1%E7%BD%91%E7%9F%A5%E8%AF%86%E7%82%B9%E6%A2%B3%E7%90%86/true">
+<meta property="article:published_time" content="2024-11-24T14:01:45.000Z">
+<meta property="article:modified_time" content="2024-11-24T15:43:29.175Z">
+<meta property="article:author" content="xuanchu">
+<meta property="article:tag" content="计算机网络">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/2024/11/24/%E8%AE%A1%E7%BD%91%E7%9F%A5%E8%AF%86%E7%82%B9%E6%A2%B3%E7%90%86/true">
+
+
+    
+<link rel="stylesheet" href="../../../../css/style/main.css">
+ 
+
+    
+    
+    
+
+    
+    
+<link rel="stylesheet" href="../../../../css/style/dark.css">
+
+    
+<script src="../../../../js/darkmode.js"></script>
+
+
+
+     
+
+    <!-- custom head -->
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+    <body>
+        <div id="app" tabindex="-1">
+            <header class="header">
+    <div class="header__left">
+        <a href="../../../../index.html" class="button">
+            <span class="logo__text">Xc&#39;s blog</span>
+        </a>
+    </div>
+    <div class="header__right">
+        
+            <div class="navbar__menus">
+                
+                    <a href="../../../../index.html" class="navbar-menu button">首页</a>
+                
+                    <a href="../../../../tags/" class="navbar-menu button">标签</a>
+                
+                    <a href="../../../../archives/" class="navbar-menu button">归档</a>
+                
+                    <a href="../../../../friends/" class="navbar-menu button">友链</a>
+                
+                    <a href="../../../../page/" class="navbar-menu button">Page</a>
+                
+            </div>
+        
+        
+        
+    <a href="../../../../search/" id="btn-search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="24" height="24" fill="currentColor" stroke="currentColor" stroke-width="32"><path d="M192 448c0-141.152 114.848-256 256-256s256 114.848 256 256-114.848 256-256 256-256-114.848-256-256z m710.624 409.376l-206.88-206.88A318.784 318.784 0 0 0 768 448c0-176.736-143.264-320-320-320S128 271.264 128 448s143.264 320 320 320a318.784 318.784 0 0 0 202.496-72.256l206.88 206.88 45.248-45.248z"></path></svg>
+    </a>
+
+
+        
+        
+    <a href="javaScript:void(0);" id="btn-toggle-dark">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+    </a>
+
+
+        
+            <a class="dropdown-icon button" id="btn-dropdown" tabindex="0"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" width='24' height='24' fill="none" stroke="currentColor" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round"><path fill="currentColor" d="M3.314,4.8h13.372c0.41,0,0.743-0.333,0.743-0.743c0-0.41-0.333-0.743-0.743-0.743H3.314c-0.41,0-0.743,0.333-0.743,0.743C2.571,4.467,2.904,4.8,3.314,4.8z M16.686,15.2H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,15.2,16.686,15.2z M16.686,9.257H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,9.257,16.686,9.257z"></path></svg></a>
+            <div class="dropdown-menus" id="dropdown-menus">
+                
+                    <a href="../../../../index.html" class="dropdown-menu button">首页</a>
+                
+                    <a href="../../../../tags/" class="dropdown-menu button">标签</a>
+                
+                    <a href="../../../../archives/" class="dropdown-menu button">归档</a>
+                
+                    <a href="../../../../friends/" class="dropdown-menu button">友链</a>
+                
+                    <a href="../../../../page/" class="dropdown-menu button">Page</a>
+                
+            </div>
+        
+    </div>
+</header>
+
+
+            <main class="main">
+    
+
+<div class="post-title">
+    <h1 class="post-title__text">
+        计网知识点梳理
+    </h1>
+    <div class="post-title__meta">
+        <a href="../../../../archives/2024/11/" class="post-meta__date button">2024-11-24</a>
+        
+    <span class="separate-dot"></span><a href="../../../../categories/cs%E4%B8%93%E4%B8%9A%E8%AF%BE/" class="button">cs专业课</a>
+
+ 
+        
+    
+    
+
+
+ 
+
+ 
+    </div>
+</div>
+
+
+
+<article class="post content-card">
+    <div class="post__header"></div>
+    <div class="post__content">
+        <blockquote>
+<p>based on Computer Networking_ A Top-Down Approach, Global Edition, 8th Edition </p>
+</blockquote>
+<h1 id="1-Intro"><a href="#1-Intro" class="headerlink" title="1. Intro"></a>1. Intro</h1><ul>
+<li><strong>什么是网络边缘、网络核心？</strong><ul>
+<li>网络核心是指分组交换的网络(mesh)和连接各终端的链接</li>
+<li>网络边缘是指各主机、终端</li>
+</ul>
+</li>
+<li><strong>什么是Internet?</strong><ul>
+<li>终端、分组交换、交流、网络链接、协议、网络标准组成的系统</li>
+<li>提供应用服务的组织架构，提供编程接口给各分布的应用<ul>
+<li>类似于socket?：socket是关于接口的调用<ul>
+<li>只有socket吗？</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>什么是协议</strong><ul>
+<li>定义了格式、信息的收发顺序、在信息传输上采取的行为</li>
+<li>TCP, UDP<ul>
+<li>TCP的三次握手？</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>什么是ISP？</strong></li>
+<li><strong>什么是RFC？</strong><ul>
+<li>Internet协议字典，包含了关于互联网各种相关信息</li>
+</ul>
+</li>
+<li><strong>现在最常用的两种住宅宽带的网络接入？</strong><ul>
+<li>DSL（接入网）<ul>
+<li>用一根存在的点环线连到central office</li>
+</ul>
+</li>
+<li>cable<ul>
+<li>非对称</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>其他住宅网络连接<ul>
+<li>FTTH(光纤到户)</li>
+<li>家庭网络</li>
+</ul>
+</li>
+<li>机构接入的网络<ul>
+<li>以太网（有线的）</li>
+<li>WLAN（无线）</li>
+</ul>
+</li>
+<li>物理链路<ul>
+<li>双绞线(TP)</li>
+<li>同轴电缆</li>
+<li>光纤</li>
+<li>无线链路</li>
+</ul>
+</li>
+<li><strong>什么是分组交换和电路交换？</strong><ul>
+<li>分组交换<ul>
+<li>在我们学了一点网络层的内容后回来看，会有个更清晰的脉络。在网络层讲路由器的时候，其实就是对分组交换更具体的展开</li>
+<li>我们是要在不同端口(input, output port)中来进行转发的（根据转发表，而这个转发表体现了路由&#x2F;route，它是由远程的控制器计算的，而不由路由器实际参与）所以<strong>分组交换</strong>其实只涉及我们<strong>相邻路由器转发的这一很短的部分</strong></li>
+<li>其实质是队列的操作处理， 所以我们会遇到<strong>HOL（首部阻塞问题）【此处请联想一下接下来哪里还出现了HOL，由此思考HOL会在哪些特点出现时出现】</strong>。我们需要考虑如何处理各个分组。我们可以把不同的组分成几个类，按某些特定的顺序来推入（权重、优先权、特定顺序等）</li>
+<li><strong>store-and-forward transmission</strong>：当整个分组都被接收到的时候才能进行转发</li>
+</ul>
+</li>
+<li>电路交换<ul>
+<li>什么是电路(circuit)？<ul>
+<li>就是在传输前提前建立好的连接（类比于预约一个餐厅），并且预留好好一个稳定不变的传输速率</li>
+</ul>
+</li>
+<li><strong>什么是FDM,TDM?</strong><ul>
+<li>FDM(频率)：横着切</li>
+<li>TDM(时间)：竖着切</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>分组交换中有哪些延迟类型呢</strong><ul>
+<li>处理延迟<ul>
+<li>bit级别</li>
+</ul>
+</li>
+<li>排队延迟<ul>
+<li>在输出链路上等待传输</li>
+</ul>
+</li>
+<li>传输延迟(transmission)<ul>
+<li>将分组发送到链路上</li>
+</ul>
+</li>
+<li>传播延时(propagation)<ul>
+<li>在整个传到下一个host的时间</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>什么是吞吐量？</strong><ul>
+<li>怎么求两个host之间的吞吐量？（最小值&#x2F;<strong>bottleneck link</strong>）</li>
+</ul>
+</li>
+<li><strong>在每层上不同信息的名称？</strong></li>
+<li><strong>什么是IETF？</strong><ul>
+<li>互联网工程任务组</li>
+</ul>
+</li>
+<li><strong>什么是IP欺骗(IP_Spoofing)？</strong><ul>
+<li>伪造源地址</li>
+</ul>
+</li>
+<li><strong>什么是DoS？</strong><ul>
+<li>通过请求压垮计算机</li>
+</ul>
+</li>
+<li><strong>为什么要分层？</strong><ul>
+<li>设计&#x2F;讨论复杂系统</li>
+<li>明确的结构允许识别系统各部分之间的关系</li>
+<li>模块化减轻了维护、更新系统的压力</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h1 id="2-Application-Layer"><a href="#2-Application-Layer" class="headerlink" title="2. Application Layer"></a>2. Application Layer</h1><ul>
+<li>C-s架构和p2p架构？</li>
+<li><strong>如何交流进程</strong>？(process)<ul>
+<li>同主机内：inter-process communication</li>
+<li>不同主机：交换信息(messages)</li>
+</ul>
+</li>
+<li><strong>不同主机之间如何交换信息呢？</strong><ul>
+<li>对于<strong>主机</strong>来说，需要socket去对应信息</li>
+<li>对于<strong>信息（进程）</strong> 来说，需要标识符(identifier),这个标识符既需要包含IP地址，也需要端口号（单单ip是不行的：一个ip可能同时运行多个进程）</li>
+</ul>
+</li>
+<li><strong>socket处于哪里？</strong><ul>
+<li>传输层和应用层之间</li>
+</ul>
+</li>
+<li>什么是TLS？<ul>
+<li>transport layer security</li>
+<li>它不是与UDP、TCP并列，而是对TCP的改进</li>
+</ul>
+</li>
+<li><strong>什么是HTTP?</strong><ul>
+<li>他是个协议！(应用层的协议)<ul>
+<li>类比于TCP,UDP之于transport layer</li>
+</ul>
+</li>
+<li>hypertext transfer protocol</li>
+<li>它使用TCP连接(port 80)</li>
+<li>无状态，服务器不会存储过往用户的请求<ul>
+<li>？那cache呢，它不属于这个协议内部吗<ul>
+<li>对，cache是我们后面发明出来用于保存先前信息的</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>那它这个协议的作用是啥呢？整个过程中我使用了TCP建立连接、发送消息，和它有啥关系？</li>
+<li>首先HTTP是在用户和服务器的进程中实现的，它定义了“在服务器和用户间交流的<strong>信息的格式</strong>”，它同时定义了用户如何从服务器那里请求信息</li>
+</ul>
+</li>
+<li>persistent HTTP? non-persistent HTTP?<ul>
+<li>non-persistent<ul>
+<li>TCP一次连接的过程中只能发送一个object<ul>
+<li>衍生思考：pipeline?既然我这个信息的传输是依靠TCP在传输层通信的，那么我们是否在此处也会去考虑到TCP相关的细节和协议？所以TCP并不遵循流水线协议？那此处是如何控制只传输一个文件就关闭链接的呢？难道是接收到一个ack就关闭吗？但流水线的关键不就在于就算它还没返回ack，我也在不停地发吗<ul>
+<li>首先，连接的关闭不是依靠传输层&#x2F;TCP的，而是应用层的HTTP协议本身，在其头部会存放链接关闭的信息</li>
+<li>其次，TCP确实不依靠流水线协议</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>这种情况下的响应时间？<ul>
+<li>2RTT+文件传输时间</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>persistent(1.1)<ul>
+<li>流水线</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>HTTP有哪些请求信息模式？<ul>
+<li>post<ul>
+<li>上传信息</li>
+</ul>
+</li>
+<li>head<ul>
+<li>如果一个URL以GET被请求，则才会返回该请求头部</li>
+</ul>
+</li>
+<li>get<ul>
+<li>包含用户数据在get请求数据中</li>
+</ul>
+</li>
+<li>put<ul>
+<li>上传新文件</li>
+<li>取代URL中存在的post请求的主体</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>301，400，505分别代表什么？<ul>
+<li>301：requested object moved, new location specified later in this message</li>
+<li>400：request msg not understood by server</li>
+<li>500：HTTP Version Not Supported</li>
+</ul>
+</li>
+<li><strong>cookie由哪些组成？</strong><ul>
+<li>http响应、请求报文中的cookies首部行</li>
+<li>用户端保留一个cookies文件，由用户浏览器管理</li>
+<li>web站点有一个后端数据库</li>
+</ul>
+</li>
+<li><strong>什么是web cache</strong><ul>
+<li>同时叫做代理服务器</li>
+<li>是一个实体服务器</li>
+<li>延伸出来了conditional get<ul>
+<li>其在报文中的标志是？</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>什么是HTTP&#x2F;2？</strong><ul>
+<li>由于HTTP&#x2F;1.1可能会遇到 <strong>HOL、重传（各种关于TCP信息丢失的情况）</strong>，此处引入版本2</li>
+<li>把大文件拆成许多帧，然后并行的传，而非像1.1一样，等传了一个完整的文件以后才能传下一个文件（队列的特性）</li>
+</ul>
+</li>
+<li><strong>E-mail由哪些组成</strong><ul>
+<li>user agents</li>
+<li>mail servers</li>
+<li>SMTP<ul>
+<li>基于TCP</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>HTTP和SMTP的区别？</strong><ul>
+<li>http是用户请求数据，SMTP是用户发送数据</li>
+<li>SMTP以<code>CRLF</code>为信息结尾</li>
+<li>SMTP用的是persistent connection</li>
+</ul>
+</li>
+<li><strong>SMTP在整个流程的收发中，在何时起作用？</strong><ul>
+<li><img src="/images/Pasted%20image%2020241122142630.png"></li>
+<li>为什么我们发邮件还要先发送到发送服务器上，而不能直接发送到对方服务器上？<ul>
+<li>因为本地的agent是没有关于目的地的信息的</li>
+</ul>
+</li>
+<li><strong>注意</strong>！接收方是不用SMTP协议的，因为SMTP是pull，而不是request。此处应该用IMAP或HTTP</li>
+</ul>
+</li>
+<li><strong>IMAP在何时作用？</strong><ul>
+<li>见上</li>
+</ul>
+</li>
+<li><strong>到底DNS是什么东西？</strong><ul>
+<li>定义<ul>
+<li>分布的数据库（在各个分层的DNS服务器中）</li>
+<li>一个可以让host查询分布数据库的应用层的协议</li>
+</ul>
+</li>
+<li>直观来说，他是一个用于转换主机名(hostname)到IP地址的一种管理册的服务<ul>
+<li><strong>那什么是hostname,什么是IP address?他们有什么区别和联系呢？</strong><ul>
+<li>首先一个host同时拥有这两个标识符(identifier)</li>
+<li>其次，hostname是为了让人类更便于记忆的（但因此他就缺少了地址的信息），而IP address就是提供地址信息</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>HTTP和SMTP都会应用DNS，当我们通过DNS查询到IP address后，可以启动TCP连接，连接到对应的host的端口</li>
+<li>如果我们只用一个DNS服务器来处理所有DNS查询呢？（来自成千上万的主机的HTTP查询和e-mail信息）<ul>
+<li>高度中心化的：用户的查询是直接和DNS服务器交互的。</li>
+<li>因此如果DNS服务器崩溃了，整个互联网也崩溃了</li>
+</ul>
+</li>
+<li>所以实际的DNS是层次化、分布设计的。从顶向下分别是：<ul>
+<li>根服务器（也不只有一个）</li>
+<li>顶级域服务器(TLD)</li>
+<li>权威DNS服务器(Authoritative)</li>
+<li>ps:还有local DNS server，但它并不严格属于DNS的层次架构。它主要是给不同ISP用的</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>DNS的递归查询和遍历查询</strong><ul>
+<li>遍历查询：<img src="/images/Pasted%20image%2020241123142900.png"></li>
+<li>递归查询：<img src="/images/Pasted%20image%2020241123142914.png"></li>
+<li><strong>想象函数的调用</strong></li>
+</ul>
+</li>
+<li><strong>DNS基于什么连接？</strong><ul>
+<li>UDP</li>
+</ul>
+</li>
+<li>如何计算文件分发的时间？<ul>
+<li>C-S?<ul>
+<li>需要计算服务器上传<strong>所有文件</strong>的时间、每个电脑下载单个文件的时间（为了简便计算，我们只需计算下载速率最慢的那个机子，即所需下载时间最长的机子），然后取所有时间的最大值</li>
+</ul>
+</li>
+<li>P2P?<ul>
+<li>需要计算服务器上传<strong>单个文件</strong>的是按，每个电脑下载单个文件的时间（为了简便计算，我们只需计算下载速率最慢的那个机子，即所需下载时间最长的机子），以及总文件数除以（所有上传速率相加）的时间，取其中最大值</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>BitTorrent中，如果一个host有相邻好几个邻居，它先从谁那里请求信息呢？给谁发送数据块呢？<ul>
+<li>从最稀有的数据块获取</li>
+<li>记录四个给它传输最快的peers，并每30s随机挑选一个幸运儿加入这个竞争</li>
+</ul>
+</li>
+<li>流媒体的服务<ul>
+<li>DASH</li>
+<li>CDNs(content distribution networks)<ul>
+<li>把视频存放到多个分布的地址</li>
+<li>OTT(“over the top”) challenges:来自网络边缘的网络阻塞问题</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h1 id="3-Transport-Layer"><a href="#3-Transport-Layer" class="headerlink" title="3. Transport Layer"></a>3. Transport Layer</h1><ul>
+<li><strong>传输层在何处进行作用？</strong><ul>
+<li><strong>在进程</strong>层面的交流，而非不同主机之间（这是网络层）</li>
+<li>但传输层需要依靠网络层</li>
+</ul>
+</li>
+<li><strong>什么是多路分解？多路复用？</strong><ul>
+<li>应该是我们在一个主机要从接口调用或传入信息的时候，把信息分解&#x2F;复用到多个对应接口(sockets)</li>
+<li>多路复用 multiplex<ul>
+<li>把多个应用层传来的信息包装，添加传输层的头</li>
+</ul>
+</li>
+<li>多路分解 demultiplex<ul>
+<li>按照头部信息把接收到的segment传给正确的socket</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>那既然传输层是在单主机层面上的各种协议，但TCP又涉及到在两个主机间的传输，这究竟是怎么回事？</strong><ul>
+<li>它只是依赖于网络层和数据链路层，它只需要告诉网络层“我有这些数据段需要发送到这个 IP 地址”，然后网络层负责决定如何将数据段路由到目标主机</li>
+<li>TCP 类似邮局的打包部门。将信件装进信封、标上序号，并记录对方是否收到。并不涉及直接传输</li>
+</ul>
+</li>
+<li><strong>传输层涉及到接收方和发送方</strong><ul>
+<li>发送方：从应用层传来信息，复用包装信息(multiplex)，添加segment头部信息，传给IP</li>
+<li>接收方：从IP接收segment，提取应用层的信息，通过sockets分解（demultiplexes)信息到应用层</li>
+</ul>
+</li>
+<li><strong>地址信息是如何在信息中存储的</strong><ul>
+<li>IP来源和目的地都在datagram(network layer)</li>
+<li>端口号都在segment(transport layer)</li>
+</ul>
+</li>
+<li><strong>UDP和TCP在多路分解的时候，是如何运行的？</strong><ul>
+<li>UDP socket<ul>
+<li>两元组(目标IP地址，目标端口号)</li>
+</ul>
+</li>
+<li>TCP socket<ul>
+<li>四元组(源IP地址，源端口号，目标IP地址，目标端口号)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>创建UDP的时候，如果不申明，给它分配的端口号是在什么范围</strong><ul>
+<li>1024 to 65535</li>
+</ul>
+</li>
+<li><strong>UDP和TCP segment头部字节数？</strong><ul>
+<li>UDP: 8</li>
+<li>TCP: 20</li>
+</ul>
+</li>
+<li><strong>UDP的优势</strong><ul>
+<li>它不会建立连接，不会处理拥塞情况，可以非常<strong>快速、实时</strong>的传送信息</li>
+<li>头部信息更小</li>
+</ul>
+</li>
+<li><strong>哪些协议&#x2F;服务基于UDP？</strong><ul>
+<li>DNS</li>
+<li>SNMP</li>
+<li>HTTP&#x2F;3</li>
+<li>流媒体服务</li>
+</ul>
+</li>
+<li><strong>如何计算checksum</strong><ul>
+<li>首先明确，checksum是用于检验一个segment的完整性的</li>
+<li>如何计算它的初始checksum呢？(sender)<ul>
+<li>由于一个segment的所有数据是可以通过2进制来表示的，所以我们要做的是就是把这些数组16位一分，然后全部加起来（当然，此时checksum部分默认置为0），相加步骤仍是补码计算的步骤，然后得到的数就是checksum</li>
+</ul>
+</li>
+<li>如果有溢出的1（负数），则把这个1从个位加上去，然后再对每位取反</li>
+<li>如果无溢出（正数），则就是其本身</li>
+<li>receiver如何检验？<ul>
+<li>把所有数据16位一组相加，如果加起来全为1（16位1），则说明数据完整。<strong>（此处的加不涉及补码计算）</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>rdt1.0&#x2F;2.0&#x2F;2.1&#x2F;2.2&#x2F;3.0的区别</strong><ul>
+<li>rdt1.0: 在可靠信道上传输，即假设不会出错 </li>
+<li>rdt2.0(stop-and-wait protocol): 如果信道上会使字节翻转(bit error,指0-&gt;1&#x2F;1-&gt;0)，则引入ACK,NAK机制。（可能通过checksum，还可能通过其他检测字节是否发生错误的方式）<ul>
+<li>它只会在接收方正确的接收到信息后再发送下一个</li>
+</ul>
+</li>
+<li>rdt2.1: 如果ACK&#x2F;NAK被中断传输了呢？因此对每个包加一个序列号</li>
+<li>rdt2.2: 我们甚至不需要NAK了。只需要ACK，对ACK编号就好了（它的作用和2.1一样，只是简化了）TCP用的就是这种</li>
+<li>rdt3.0: 添加计时器，重传机制</li>
+</ul>
+</li>
+<li>RTT &#x3D; 2 * propagation time(单向的) </li>
+<li><strong>如何计算信道的利用率？</strong><ul>
+<li>”发送信息（包）所用的时间除“以”<strong>最早发送</strong>到接收到这一发送的ACK所用的时间“</li>
+</ul>
+</li>
+<li><strong>计时器啥时候启动？</strong><ul>
+<li>一个包的传输如果在半空丢失了，就启动计时器</li>
+</ul>
+</li>
+<li><strong>选择性重传的窗口大小应该设置为多大</strong><ul>
+<li>应该小于等于sequence number space的一半</li>
+<li>否则会发生，可能因为ack在中途中断，没有发送到，而导致发送端一直在发送一个固定窗口的几个值，但有可能接收方的窗口在不断移动，而导致发送方可能会发送一个不完全匹配顺序，但包的序号相同，所以误以为正确传输的情况</li>
+</ul>
+</li>
+<li><strong>什么是全双工(full-duplex)？</strong><ul>
+<li>就是在两个进程间，是可以同时双向传播的</li>
+</ul>
+</li>
+<li><strong>什么是最大传输单元(MTU)，什么是最大报文大小(MSS)?</strong><ul>
+<li>MSS： 1460字节<ul>
+<li>是传输层报文<strong>data</strong>的最大大小</li>
+<li>而不是TCP报文(包括头部)的最大的大小</li>
+</ul>
+</li>
+<li>MTU: 1500字节<ul>
+<li>TCP&#x2F;IP header的大小为40</li>
+<li>即把传输层的报文传到网络层后，加上网络层头部的大小</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>TCP头部的长度？UDP头部的长度(bytes)</strong><ul>
+<li>TCP header 20<ul>
+<li><strong>TCP&#x2F;IP header 40</strong></li>
+</ul>
+</li>
+<li>UDP header 8</li>
+</ul>
+</li>
+<li><strong>TCP报文中的各部分？</strong><ul>
+<li>sequence number field&#x2F;ack number field:各32 bits</li>
+<li>receive window: 16 bits</li>
+<li>header length : 4 bits</li>
+<li>…</li>
+</ul>
+</li>
+<li><strong>TCP的初始序列号是随机设置的，为什么？</strong><ul>
+<li>因为有可能网络种还有在传输的先前建立的连接。防止不同的连接之间产生冲突。</li>
+</ul>
+</li>
+<li><strong>TCP的ACK序号是什么？</strong><ul>
+<li>是期待的对方下一个传过来的序号，而非成功收到的序号</li>
+</ul>
+</li>
+<li><strong>如何计算RTT</strong><ul>
+<li>是动态计算的</li>
+<li>exponential weighted moving average(EWMA) 指数加权移动平均</li>
+<li><strong>为什么要计算RTT？</strong> 为了合理设置计时器的时间</li>
+<li><strong>预测RTT</strong> &#x3D; 0.875(1-a) * 先前的预测RTT + 0.125(a) * 最新检测到的RTT(这个参数是可变的，此处只是一个最常用的情况)</li>
+<li>RTT的变化率(DevRTT) &#x3D; 0.75(1-b) * DevRTT + 0.25(b) * |最新检测到的RTT - 预测RTT|</li>
+</ul>
+</li>
+<li><strong>如何设置计时器的时间？</strong><ul>
+<li>预测RTT + 4 * DevRTT</li>
+<li>为什么？<ul>
+<li>因为TCP设置了<strong>三次冗余ACK</strong>的机制(快速重传)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>HTTP3基于什么？</strong><ul>
+<li>UDP</li>
+</ul>
+</li>
+</ul>
+<h2 id="关于拥塞控制的一些深入思考"><a href="#关于拥塞控制的一些深入思考" class="headerlink" title="关于拥塞控制的一些深入思考"></a>关于拥塞控制的一些深入思考</h2><ol>
+<li>什么是fast recovery??? 应该是三次冗余传输后要进行快速重传的状态</li>
+<li>为什么三次冗余传输后没有降到一半？<ol>
+<li>因为是要变到此时的ssthresh + 3，甚至可能不降反升</li>
+<li>并且注意，在判断fast recovery得值得时候，我们得<strong>先重新判断ssthresh当时变化到多少</strong>！</li>
+</ol>
+</li>
+<li>到底哪些状态是慢启动<ol>
+<li>升到ssthresh的时候（不包括等于ssthresh的点）</li>
+<li>如果还没到ssthresh就降到1，则升和降得点都属于</li>
+<li><strong>其实就是在ssthresh下面的点！</strong></li>
+</ol>
+</li>
+<li>要判断到底是超时还是三次ACK的问题，我们要观察它下一个点的状态是否回到了1</li>
+<li>如何判断超时<ol>
+<li>它的下一个点变为1</li>
+<li>且超时可能和其他状态同时存在，比如快速恢复</li>
+</ol>
+</li>
+<li>ssthresh什么时候改变<ol>
+<li>最高点不改变，而是进行快速恢复&#x2F;下降到1这种情况下得点开始变化</li>
+</ol>
+</li>
+<li>注意！ssthresh是最高值的一半，而非上一次ssthresh的一半</li>
+<li>如果本身就只有一个MSS大小，但还是超时了，此时返回大小1，且ssthresh也变为1（而非0.5）</li>
+<li><strong>宏观</strong>看拥塞控制：它是调控整个网络的</li>
+</ol>
+
+    </div>
+     
+    <div class="post-footer__meta"><p>更新于 2024-11-24</p></div> 
+    <div class="post-entry__tags"><a href="../../../../tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" class="post-tags__link button"># 计算机网络</a></div> 
+</article>
+
+
+    <div class="nav">
+        <div class="nav__prev">
+            
+        </div>
+        <div class="nav__next">
+            
+                <a href="../hexo-github%E9%83%A8%E7%BD%B2%E4%B8%AA%E4%BA%BA%E7%BD%91%E7%AB%99%EF%BC%8C%E5%9C%A8cards%E4%B8%BB%E9%A2%98%E4%B8%8B%E5%A6%82%E4%BD%95%E9%85%8D%E7%BD%AE%E7%BD%91%E7%AB%99%E5%9B%BE%E6%A0%87-favicon/" class="nav__link">
+                    <div>
+                        <div class="nav__label">
+                            下一篇
+                        </div>
+                        <div class="nav__title">
+                            hexo&amp;github部署个人网站，在cards主题下如何配置网站图标(favicon)
+                        </div>
+                    </div>
+                    <div>
+                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M434.944 790.624l-45.248-45.248L623.04 512l-233.376-233.376 45.248-45.248L713.568 512z" fill="#808080"></path></svg>
+                    </div>
+                </a>
+            
+        </div>
+    </div>
+
+
+
+
+
+</main>
+
+            <footer class="footer">
+     
+    <a href="#" class="button" id="b2t" aria-label="回到顶部" title="回到顶部">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="32" height="32">
+            <path d="M233.376 722.752L278.624 768 512 534.624 745.376 768l45.248-45.248L512 444.128zM192 352h640V288H192z" fill="currentColor"></path>
+        </svg>
+    </a>
+
+    
+
+
+    
+     
+ 
+
+ 
+    
+        
+        <p class="footer-copyright">
+            Copyright © 2024 <a href="../../../../index.html">XC&#39;s blog</a>
+        </p>
+    
+    
+    <p>Powered by <a href="https://hexo.io" target="_blank">Hexo</a> | Theme - <a href="https://github.com/ChrAlpha/hexo-theme-cards" target="_blank">Cards</a></p>
+</footer>
+
+        </div>
+         
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+    
+ 
+
+
+    
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.4.1/dist/jquery.fancybox.min.css">
+
+    
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.4.1/dist/jquery.fancybox.min.js"></script>
+
+    <script>
+        let lazyloadT = Boolean('false'),
+            auto_fancybox = Boolean('true')
+        if (auto_fancybox) {
+            $(".post__content").find('img').each(function () {
+                var element = document.createElement("a");
+                $(element).attr("data-fancybox", "gallery");
+                $(element).attr("href", $(this).attr("src"));
+                if (lazyloadT) {
+                    $(element).attr("href", $(this).attr("data-srcset"));
+                }
+                $(this).wrap(element);
+            });
+        } else {
+            $(".post__content").find("fancybox").find('img').each(function () {
+                var element = document.createElement("a");
+                $(element).attr("data-fancybox", "gallery");
+                $(element).attr("href", $(this).attr("src"));
+                if (lazyloadT) {
+                    $(element).attr("href", $(this).attr("data-srcset"));
+                }
+                $(this).wrap(element);
+            });
+        }
+    </script>
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+
+    </body>
+</html>
