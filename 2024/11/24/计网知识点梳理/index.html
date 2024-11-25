@@ -54,7 +54,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/2024/11/24/%E8%AE%A1%E7%BD%91%E7%9F%A5%E8%AF%86%E7%82%B9%E6%A2%B3%E7%90%86/true">
 <meta property="article:published_time" content="2024-11-24T14:01:45.000Z">
-<meta property="article:modified_time" content="2024-11-25T14:10:54.430Z">
+<meta property="article:modified_time" content="2024-11-25T14:24:35.107Z">
 <meta property="article:author" content="xuanchu">
 <meta property="article:tag" content="计算机网络">
 <meta name="twitter:card" content="summary_large_image">
@@ -711,6 +711,19 @@
 </li>
 <li><strong>HTTP3基于什么？</strong><ul>
 <li>UDP</li>
+</ul>
+</li>
+<li><strong>网络层对拥塞控制提供的帮助</strong><ul>
+<li><strong>ATM Available Bite Rate (ABR) congestion control</strong> 弹性服务<ul>
+<li>路由通知输出链路还有多少可以传输的空间</li>
+<li>联想<strong>流量控制</strong>：receiver告诉sender还有多少剩余空间（捎带）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>平均吞吐量</strong><ul>
+<li>3w&#x2F;4RTT</li>
+<li>半次RTT就增加一个窗口大小（<strong>慢启动</strong>）&amp; 一次RTT增加一个窗口大小（<strong>拥塞避免</strong>），然后取其平均值得出</li>
 </ul>
 </li>
 </ul>
