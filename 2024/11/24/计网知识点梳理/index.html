@@ -54,7 +54,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/2024/11/24/%E8%AE%A1%E7%BD%91%E7%9F%A5%E8%AF%86%E7%82%B9%E6%A2%B3%E7%90%86/true">
 <meta property="article:published_time" content="2024-11-24T14:01:45.000Z">
-<meta property="article:modified_time" content="2024-11-25T14:03:02.897Z">
+<meta property="article:modified_time" content="2024-11-25T14:10:54.430Z">
 <meta property="article:author" content="xuanchu">
 <meta property="article:tag" content="计算机网络">
 <meta name="twitter:card" content="summary_large_image">
@@ -278,6 +278,26 @@
 </ul>
 </li>
 <li><strong>在每层上不同信息的名称？</strong></li>
+<li>应用层(Application layer)<ul>
+<li><strong>message</strong></li>
+</ul>
+</li>
+<li>传输层(transport layer)<ul>
+<li><strong>segment</strong> (报文段)</li>
+</ul>
+</li>
+<li>网络层(Network layer)<ul>
+<li><strong>datagram</strong></li>
+</ul>
+</li>
+<li>链路层(Link layer)<ul>
+<li><strong>frame</strong></li>
+</ul>
+</li>
+<li>物理层(Physical layer)<ul>
+<li><strong>bit</strong></li>
+</ul>
+</li>
 <li><strong>什么是IETF？</strong><ul>
 <li>互联网工程任务组</li>
 </ul>
@@ -365,20 +385,20 @@
 <ul>
 <li>HTTP有哪些请求信息模式？<ul>
 <li>post<ul>
-<li>上传信息</li>
+<li>向指定资源提交数据进行处理请求（提交表单、上传文件），又可能导致新的资源的建立或原有资源的修改</li>
 </ul>
 </li>
 <li>head<ul>
-<li>如果一个URL以GET被请求，则才会返回该请求头部</li>
+<li>与服务器索与get请求一致的相应，响应体不会返回，获取包含在小消息头中的原信息（与get请求类似，返回的响应中没有具体内容，用于获取报头）</li>
 </ul>
 </li>
 <li>get<ul>
-<li>包含用户数据在get请求数据中</li>
+<li>向特定资源发出请求</li>
+<li>请求指定页面信息，并返回实体主体</li>
 </ul>
 </li>
 <li>put<ul>
-<li>上传新文件</li>
-<li>取代URL中存在的post请求的主体</li>
+<li>向指定资源位置上上传其最新内容（从客户端向服务器传送的数据取代指定文档的内容）</li>
 </ul>
 </li>
 </ul>
