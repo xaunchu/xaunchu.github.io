@@ -54,7 +54,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/2024/11/24/%E8%AE%A1%E7%BD%91%E7%9F%A5%E8%AF%86%E7%82%B9%E6%A2%B3%E7%90%86/true">
 <meta property="article:published_time" content="2024-11-24T14:01:45.000Z">
-<meta property="article:modified_time" content="2024-11-25T14:24:35.107Z">
+<meta property="article:modified_time" content="2024-11-26T08:45:19.797Z">
 <meta property="article:author" content="xuanchu">
 <meta property="article:tag" content="计算机网络">
 <meta name="twitter:card" content="summary_large_image">
@@ -754,10 +754,54 @@
 <li>如果本身就只有一个MSS大小，但还是超时了，此时返回大小1，且ssthresh也变为1（而非0.5）</li>
 <li><strong>宏观</strong>看拥塞控制：它是调控整个网络的</li>
 </ol>
+<hr>
+<h1 id="期中考试"><a href="#期中考试" class="headerlink" title="期中考试"></a>期中考试</h1><h2 id="名词解释"><a href="#名词解释" class="headerlink" title="名词解释"></a>名词解释</h2><ol>
+<li><p><strong>TCP连接释放</strong></p>
+</li>
+<li><p><strong>AIMD</strong></p>
+</li>
+<li><p><strong>MIME</strong></p>
+</li>
+<li><p><strong>迭代式(Iterative)DNS查询</strong></p>
+</li>
+<li><p><strong>TCP&#x2F;UDP伪首部</strong><br>用于计算checksum</p>
+</li>
+</ol>
+<h2 id="简答"><a href="#简答" class="headerlink" title="简答"></a>简答</h2><ol>
+<li><p><strong>TCP&#x2F;IP 和ISO&#x2F;OSI RM(reference model)哪个更早？其主要区别是什么？</strong></p>
+</li>
+<li><p><strong>TCP采用累计确认的优点。选择性重传如果采用累计确认，是否能百分百避免已经正确传输、但乱序到达的信息的重传？</strong></p>
+</li>
+<li><p><strong>DNS采用哪个传输层服务？其IP（标识）作用是什么？</strong></p>
+</li>
+<li><p><strong>web缓存会导致一个问题。HTTP如何解决这个问题？</strong></p>
+</li>
+<li><p><strong>TCP三次握手。如果来自A的旧SYN段到达B，B返回相应后又一个来自A的旧ACK到达B，问A，B能否建立连接？</strong></p>
+</li>
+</ol>
+<h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><ol>
+<li><p>用户获取web页面，其解析过程中共访问n个DNS服务器，其时间分别为RTT1,…,RTTn。再假设该网页（一个基本HTML文本对象）引用了八个图片对象。设RTT0表示本地主机与包含所有对象的服务器之间的RTT时间。假设对象的传输时间为0，试计算从用户点击链接到到浏览器收到所有对象的时间</p>
+<ol>
+<li><strong>非持久HTTP连接</strong><br>  RTT1+…+RTTn + 2 * RTT0</li>
+<li><strong>持久非流水线HTTP连接</strong><br>  RTT1+…+RTTn + 2 * RTT0 + 8 * 2 * RTT0</li>
+<li><strong>持久流水线HTTP连接</strong><br>  RTT1+…+RTTn + 2 * RTT0 + RTT0</li>
+</ol>
+</li>
+<li><p>HTTP格式</p>
+<ol>
+<li>浏览器版本</li>
+</ol>
+</li>
+<li><p>TCP拥塞控制</p>
+<ol>
+<li>第n段报文在哪一段RTT发送</li>
+</ol>
+</li>
+</ol>
 
     </div>
      
-    <div class="post-footer__meta"><p>更新于 2024-11-25</p></div> 
+    <div class="post-footer__meta"><p>更新于 2024-11-26</p></div> 
     <div class="post-entry__tags"><a href="../../../../tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" class="post-tags__link button"># 计算机网络</a></div> 
 </article>
 
