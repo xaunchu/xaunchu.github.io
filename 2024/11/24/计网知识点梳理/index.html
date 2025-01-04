@@ -54,7 +54,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/2024/11/24/%E8%AE%A1%E7%BD%91%E7%9F%A5%E8%AF%86%E7%82%B9%E6%A2%B3%E7%90%86/true">
 <meta property="article:published_time" content="2024-11-24T14:01:45.000Z">
-<meta property="article:modified_time" content="2024-11-26T08:45:19.797Z">
+<meta property="article:modified_time" content="2025-01-04T07:06:26.997Z">
 <meta property="article:author" content="xuanchu">
 <meta property="article:tag" content="计算机网络">
 <meta name="twitter:card" content="summary_large_image">
@@ -798,10 +798,193 @@
 </ol>
 </li>
 </ol>
+<hr>
+<h1 id="4-Network-Layer-data-plane"><a href="#4-Network-Layer-data-plane" class="headerlink" title="4. Network Layer (data plane)"></a>4. Network Layer (data plane)</h1><ul>
+<li>什么是网络层的数据层？控制层？<ul>
+<li>数据层面主要是：路由器从输入链路向其输出链路<strong>转发</strong>数据报</li>
+<li>控制平面：<strong>路由</strong><ul>
+<li>传统方法<ul>
+<li>路由选择算法<ul>
+<li><strong>中心化的算法</strong>：<strong>链路状态算法</strong> link-state (LS) algorithm，拥有全局状态的信息</li>
+<li><strong>去中心化的算法</strong>（每个结点没有全局的信息）：<strong>距离向量算法</strong> distance-vector (DV) algorithm，每个结点拥有对所有其他结点的距离估计的向量</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>SDN算法</strong>（软件定义网络）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>网络服务模型</strong> (network service model)<ul>
+<li>确保交付</li>
+<li>具有时延上界的确保交付</li>
+<li>有序分组交付</li>
+<li>确保最小带宽</li>
+<li>安全性</li>
+<li><em><strong>注意辨别其与因特网的网络层（尽力而为）</strong></em></li>
+</ul>
+</li>
+<li>转发和路由？<ul>
+<li><strong>转发</strong>：即路由器将一个分组从输入链路移动到适当的输出链路</li>
+<li><strong>路由</strong>：分组从发送方流向接收方，网络层决定其路由路径</li>
+</ul>
+</li>
+<li>路由器的组成<ul>
+<li>输入端口</li>
+<li>交换结构</li>
+<li>输出端口</li>
+<li>路由选择处理器</li>
+</ul>
+</li>
+<li><strong>基于目的地转发</strong>和<strong>通用转发</strong>？<ul>
+<li>前者是通过最终目的地来决定转发出口</li>
+<li>后者是通过各种因素的结合</li>
+</ul>
+</li>
+<li>基于目的地转发的规模问题处理（输入端口）：<strong>最长前缀匹配</strong><ul>
+<li>如何再在硬件上加速查找？<strong>三台内容可寻址存储器(TCAM)</strong></li>
+</ul>
+</li>
+<li><strong>“匹配加动作”</strong><ul>
+<li>不仅仅在通用转发，是一个很一般的抽象出来的特定情况</li>
+<li>在许多网络设备中，入<strong>路由器、链路层交换机、网络地址转换器(NAT)</strong></li>
+</ul>
+</li>
+<li><strong>交换</strong>（交换结构）：在此处网络层的交换指的是从输入端口转发到输出端口中<ul>
+<li>经<strong>内存</strong>交换（在<strong>路由选择处理器</strong>[CPU]的直接控制下完成的）<ul>
+<li><strong>复制分组</strong>到输出端口的缓存中。</li>
+<li>对于内存带宽为每秒写进内存或从内存读出最多B个分组，<strong>总转发吞吐量</strong>（分组从输入端口到输出端口的总速率）必然<strong>小于B&#x2F;2</strong>。</li>
+<li><strong>不能同时转发两个分组</strong>，即使他们的目的端口不同，因为经过共享系统总线一次仅能执行一个内存读&#x2F;写</li>
+</ul>
+</li>
+<li>经<strong>总线</strong>交换（不需要路由选择处理器的干预）<ul>
+<li>通过<strong>标签</strong>来匹配。</li>
+<li>如果多个分组同时到达路由器，<strong>只有一个分组能跨越总线</strong>，其他必须等待</li>
+</ul>
+</li>
+<li>经<strong>互联网络</strong>交换<ul>
+<li>纵横式交换机，由2N条总线组成的互联网络，连接N个输入端口和N个输出端口</li>
+<li>可以并行转发多个分组</li>
+<li><strong>非阻塞的</strong>：只要没有其他分组转发到当前输出端口，就不会被阻塞。但如果多个分组到达同一个，就会阻塞</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>输出端口的处理</strong><ul>
+<li>此处假设输出端口仅仅会出现同端口的阻塞</li>
+<li><strong>输入排队</strong>: <strong>HOL</strong>，输入端口需要等前部的分组被发送出去才能发出后面的分组</li>
+<li><strong>输出排队</strong>：<strong>主动队列管理算法(AQM)</strong> e.g. 随机早期检测<ul>
+<li><strong>分组调度</strong><ul>
+<li><strong>先进先出</strong> (FIFO&#x2F;FCFS)</li>
+<li><strong>优先权排队</strong> <ul>
+<li>在不同分组间设立等级，等级高的先传输；如果等级相同，则还是用FIFO策略</li>
+<li><strong>非抢占式优先权排排队</strong>：一旦分组开始传输，就不能打断</li>
+</ul>
+</li>
+<li><strong>循环排队(round robin)</strong><ul>
+<li>仍是对分组分类，但此时不分高下，而是对各类别循环调度</li>
+<li>在这里要注意 <strong>保持工作排队</strong>：链路不允许保持空闲</li>
+<li>一种通用形式的循环排队：<strong>加权公平排队(WFQ)</strong><ul>
+<li>&#x3D;&#x3D;这里值得再研究一下，但我觉得太细了，先暂且不看&#x3D;&#x3D;</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>地址分配</li>
+<li>通用转发<ul>
+<li>match 和 action?</li>
+<li>openflow?</li>
+</ul>
+</li>
+<li>网络架构(Internet architecture)</li>
+<li>IP协议<ul>
+<li><strong>数据报(datagram)</strong> 的格式<ul>
+<li>IPV4   </li>
+<li><img src="/images/Pasted%20image%2020250102165205.png"></li>
+<li>一般的IP数据报具有 <strong>20字节</strong> 的首部</li>
+<li><strong>数据报长度</strong>的长为<strong>16比特</strong>，因此IP数据包理论的最大长度为65535字节。然而数据报很少超过1<strong>500字节</strong>，因为这一长度可以使其<strong>容纳最大长度以太网帧</strong>的载荷字段</li>
+<li><strong>再理解MTU</strong>：一个<strong>链路层帧</strong>能承载的最大数据量。因此它严格限制了<strong>IP数据报的长度</strong>。<ul>
+<li>那么当某链路收到一个IP数据报时，发现其MTU小于该IP数据报的长度，则应该<strong>分片</strong><ul>
+<li>所以需要用到 <em>标识、标志、片偏移字段</em> </li>
+<li>每个分片具有初始数据报的源地址、目标地址与标识号（通过<strong>标识号</strong>来辨别分片是否属于统一数据报）</li>
+<li>最后一个片的<strong>标志</strong>比特被设为0，其他的为1</li>
+<li><strong>片偏移字段</strong>用于指定该片应放在原IP数据报的哪个位置，从而确定是否丢失片，并保证按正确顺序重新组装片</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>IPV4地址分配</strong><ul>
+<li>一个IP地址与一个 <strong>接口(interface)</strong> 相关联</li>
+<li>长度：32 bit</li>
+<li><strong>点分十进制记法</strong></li>
+<li><strong>子网掩码</strong></li>
+<li><strong>无类别域间路由选择 (CIDR)</strong> a.b.c.d&#x2F;x 最高x比特构成IP地址的<strong>网络部分</strong>，称为<strong>前缀&#x2F;网络前缀</strong><ul>
+<li><strong>地址聚合（路由聚合&#x2F;路由摘要）</strong>，使用单个网络前缀通告多个网络的能力；当其他路由器看到这一路由器中的地址块时，使用 <strong>最长前缀匹配</strong></li>
+<li><strong>分类编址</strong>：IP地址的网络部分被限制为长度8,16或24(A, B, C类网络)</li>
+<li><strong>获取一块地址</strong><ul>
+<li>如果要在一个ISP的地址块的基础上分配8个组织，则我们就在原先基础的x位数上还要加 $\log_{2}{x}$ 位，来给这八个组织编码，此处需要三位。然后再对这三位从000编到111(8个)。再把它们写成二进制的格式来读取它这一栏到底是十进制的多少。</li>
+</ul>
+</li>
+<li><strong>获取主机地址：动态主机配置协议（DHCP）</strong> 又称为即插即用协议&#x2F;零配置协议<ul>
+<li><strong>DHCP服务器发现</strong>：客户端生成含有<strong>广播目的地址</strong>和<strong>本主机（你连入的主机）的源IP地址</strong>的数据报</li>
+<li><strong>DHCP服务器提供</strong>：DHCP服务器收到上面的报文后，用DHCP提供报文做出相应，仍是<strong>广播目的地址</strong>，并推荐一个IP地址、网络掩码、IP地址租用期</li>
+<li><strong>DHCP请求</strong>：新到达的客户从服务器中选择一个，并向被选中的服务器用 <strong>DHCP请求报文</strong>响应</li>
+<li><strong>DHCP ACK</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>	  </p>
+</li>
+<li><strong>网络地址转换 (NAT)</strong><ul>
+<li><strong>专用地址(private network)</strong>: 它只在专用的地域有效，因此可以重复在全球使用。但如果它是重复的话，我们应该如何处理和全球互联网分组交流时的编址问题呢？答案在于NAT<ul>
+<li>&#x3D;&#x3D;如何判断是否是专用地址&#x3D;&#x3D;</li>
+</ul>
+</li>
+<li>NAT对于外部来说就像一个<strong>具有单一IP地址的单一设备</strong>，他把家庭网络的细节隐藏了</li>
+<li>那么从广域网发送到同一个目的IP地址，路由器该如何知道它应将哪个分组发给哪个内部主机呢？ <strong>使用NAT转换表</strong></li>
+<li><strong>中间盒</strong> 不执行传统的数据报转发，而是执行像NAT，流量流的负载均衡，流量防火墙等功能<ul>
+<li>防火墙, IDS（入侵检测系统），IPS（入侵防止系统）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>IPv6</strong></li>
+<li><img src="/images/Pasted%20image%2020250104141506.png"></li>
+<li>首部成为定长的<strong>40字节</strong></li>
+<li>IPV6不能分片和重新组装，而是发送“分组太大”的ICMP差错报文。发送方从而用较小长度的IP数据报重发数据</li>
+<li>没有首部检验和</li>
+<li>没有选项</li>
+</ul>
+</li>
+<li><strong>通用转发</strong><ul>
+<li><strong>匹配加动作</strong></li>
+<li>基于 <strong>openflow</strong><ul>
+<li><strong>流表</strong> (flow table)<ul>
+<li>首部字段值的集合</li>
+<li>计数器集合</li>
+<li>动作集合</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 
     </div>
      
-    <div class="post-footer__meta"><p>更新于 2024-11-26</p></div> 
+    <div class="post-footer__meta"><p>更新于 2025-01-04</p></div> 
     <div class="post-entry__tags"><a href="../../../../tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" class="post-tags__link button"># 计算机网络</a></div> 
 </article>
 
@@ -854,7 +1037,7 @@
     
         
         <p class="footer-copyright">
-            Copyright © 2024 <a href="../../../../index.html">XC&#39;s blog</a>
+            Copyright © 2025 <a href="../../../../index.html">XC&#39;s blog</a>
         </p>
     
     
